@@ -1,0 +1,47 @@
+import React, { useState } from "react";
+
+const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-auto bg-smoke-light flex">
+      <div className="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg">
+        <span
+          className="absolute top-0 right-0 p-4 cursor-pointer"
+          onClick={onClose}
+        >
+          &#x2715; {/* This is a unicode character for the "X" button */}
+        </span>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <div className="p-4">
+      <button
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        onClick={() => setIsModalOpen(true)}
+      >
+        Open Modal
+      </button>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className="text-lg font-bold mb-4">Modal Title</h2>
+        <p className="mb-4">
+          This is a modal. You can place any content here, like forms or
+          additional information.
+        </p>
+        <button
+          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
+          onClick={() => setIsModalOpen(false)}
+        >
+          Close Modal
+        </button>
+      </Modal>
+    </div>
+  );
+}
