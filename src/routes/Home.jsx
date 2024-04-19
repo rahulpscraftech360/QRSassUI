@@ -81,6 +81,7 @@ export default function HomePage() {
           console.log("index");
         })
         .catch((error) => {
+          console.log("first clerk error", error);
           // Handle error
           toast({
             variant: "destructive",
