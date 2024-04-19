@@ -196,7 +196,8 @@ const WhatsappTemplate = (props) => {
     console.log(eventData);
     try {
       const response = await axios.post(
-        "http://localhost:5000/v1/whatsapp/sendQR",
+        // "http://localhost:5000/v1/whatsapp/sendQR",
+        "http://64.227.172.82:5000/v1/whatsapp/sendQR",
         { htmlTemplate, participants, subject, eventData }
       );
 

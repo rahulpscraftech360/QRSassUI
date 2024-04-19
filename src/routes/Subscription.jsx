@@ -94,7 +94,8 @@ const Subscription = () => {
     const interval = setInterval(async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/v1/organizations/${orgId}/checkSubscription`,
+          // `http://localhost:5000/v1/organizations/${orgId}/checkSubscription`,
+          `http://64.227.172.82:5000/v1/organizations/${orgId}/checkSubscription`,
           {
             method: "GET",
             headers: {
@@ -145,7 +146,8 @@ const Subscription = () => {
     try {
       setSubscriptionData(null);
       const response = await axios.post(
-        "http://localhost:5000/v1/razorpay/razorpay-webappSubscription",
+        // "http://localhost:5000/v1/razorpay/razorpay-webappSubscription",
+        "http://64.227.172.82:5000/v1/razorpay/razorpay-webappSubscription",
         {
           organization,
           plan,

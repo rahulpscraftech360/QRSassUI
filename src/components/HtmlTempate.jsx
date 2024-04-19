@@ -110,7 +110,9 @@ const HtmlTempate = (props) => {
   const saveTemplate = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/v1/template/templates/",
+        // "http://localhost:5000/v1/template/templates/",
+
+        "http://64.227.172.82:5000/v1/template/templates/",
         {
           method: "POST",
           headers: {
@@ -195,12 +197,21 @@ const HtmlTempate = (props) => {
   const sendHtmlToBackend = async () => {
     console.log(htmlTemplate);
     try {
-      const response = await axios.post("http://localhost:5000/v1/email/send", {
-        htmlTemplate,
-        participants,
-        subject,
-        eventData,
-      });
+      // const response = await axios.post("http://localhost:5000/v1/email/send", {
+      //   htmlTemplate,
+      //   participants,
+      //   subject,
+      //   eventData,
+      // });
+      const response = await axios.post(
+        "http://64.227.172.82:5000/v1/email/send",
+        {
+          htmlTemplate,
+          participants,
+          subject,
+          eventData,
+        }
+      );
 
       // Log the response
       console.log("Response from the server:", response);

@@ -68,7 +68,8 @@ export default function HomePage() {
 
       // Send the session ID to your backend
       axios
-        .post("http://localhost:5000/user", { sessionId })
+        // .post("http://localhost:5000/user", { sessionId })
+        .post("http://64.227.172.82:5000/user", { sessionId })
 
         .then((response) => {
           console.log("response", response.data);

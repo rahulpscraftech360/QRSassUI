@@ -15,7 +15,8 @@ export default function SignInPage() {
       console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
       // Send the session ID to your backend
       axios
-        .post("http://localhost:5000/store-user", {
+        // .post("http://localhost:5000/store-user", {
+        .post("http://64.227.172.82:5000/store-user", {
           body: JSON.stringify({ sessionId }),
         })
         .then((response) => {

@@ -26,7 +26,8 @@ const Notion = () => {
     if (!code) return;
     // Replace getUserId() with your logic to get the user ID
 
-    fetch(`http://localhost:5000/v1/notion/login/${code}`, {
+    // fetch(`http://localhost:5000/v1/notion/login/${code}`, {
+    fetch(`http://64.227.172.82:5000/v1/notion/login/${code}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
