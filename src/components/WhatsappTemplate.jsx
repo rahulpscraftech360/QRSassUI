@@ -152,8 +152,18 @@ const WhatsappTemplate = (props) => {
   const saveTemplate = async () => {
     console.log(htmlTemplate);
     try {
+      // const response = await fetch(
+      //   "http://localhost:5000/v1/template/templates/",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ htmlContent: htmlTemplate }),
+      //   }
+      // );
       const response = await fetch(
-        "http://localhost:5000/v1/template/templates/",
+        "http://64.227.172.82:5000/v1/template/templates/",
         {
           method: "POST",
           headers: {
