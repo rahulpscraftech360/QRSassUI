@@ -333,7 +333,7 @@ export default function Events() {
             })}
             {sortedAndSlicedTodaysEvents.length === 0 && (
               <div className="flex text-center justify-center gap-4 mb-3">
-                <siv>No events Todays</siv>
+                <div>No events Todays</div>
               </div>
             )}
 

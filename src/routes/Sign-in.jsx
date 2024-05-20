@@ -16,7 +16,7 @@ export default function SignInPage() {
       // Send the session ID to your backend
       axios
         // .post("http://localhost:5000/store-user", {
-        .post("http://localhost:5000/store-user", {
+        .post("https://living-alien-polite.ngrok-free.app/store-user", {
           body: JSON.stringify({ sessionId }),
         })
         .then((response) => {

@@ -68,7 +68,7 @@ export default function HomePage() {
 
       // Send the session ID to your backend
       axios
-        .post("http://localhost:5000/user", { sessionId })
+        .post("https://living-alien-polite.ngrok-free.app/user", { sessionId })
         // .post("http://165.22.208.201:5000/user", { sessionId })
 
         .then((response) => {
