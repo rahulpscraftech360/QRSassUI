@@ -25,26 +25,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 
-export default function InvitationOptionsModal() {
+export default function NotificationModal() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const navigate = useNavigate();
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog size="lg" open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="" size="lg" variant="outline">
-            <MailIcon className="w-4 h-4  inline-block" />
-            Send Invitations
+          <Button className=" w-full " size="lg" variant="outline">
+            <MailIcon className="w-4 h-4 mr-2 inline-block" />
+            Send Notification
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Send Invitation</DialogTitle>
-            {/* <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription> */}
+            <DialogTitle>Send Notification</DialogTitle>
           </DialogHeader>
           <ProfileForm navigate={navigate} />
         </DialogContent>
@@ -57,12 +54,12 @@ export default function InvitationOptionsModal() {
       <DrawerTrigger asChild>
         <Button size="lg" variant="outline">
           <MailIcon className="w-4 h-4 mr-2 inline-block" />
-          Send Invitations
+          Send Notification
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Send Invitation</DrawerTitle>
+          <DrawerTitle>Send Notification</DrawerTitle>
           {/* <DrawerDescription>
             Make changes to your profile here. Click save when you're done.
           </DrawerDescription> */}
@@ -84,7 +81,7 @@ function ProfileForm({ className, navigate }) {
       <div className="grid gap-2">
         <Button
           onClick={() => {
-            navigate("sendEmailInvitation");
+            navigate("sendEmailNotification");
           }}
           size="lg"
           variant="outline"
@@ -97,7 +94,7 @@ function ProfileForm({ className, navigate }) {
         {" "}
         <Button
           onClick={() => {
-            navigate("sendWhatsappInvitation");
+            navigate("sendWhatsappNotification");
           }}
           size="lg"
           variant="outline"
@@ -107,7 +104,7 @@ function ProfileForm({ className, navigate }) {
         </Button>
       </div>
       <div className="grid gap-2">
-        <Button
+        {/* <Button
           onClick={() => {
             navigate("Download QRCode");
           }}
@@ -116,7 +113,7 @@ function ProfileForm({ className, navigate }) {
         >
           <MailIcon className="w-4 h-4 mr-2 inline-block" />
           Download QR
-        </Button>
+        </Button> */}
       </div>
     </form>
   );

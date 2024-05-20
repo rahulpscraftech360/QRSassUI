@@ -97,95 +97,99 @@ export default function Events() {
   }, []);
 
   return (
-    <div className="grid min-h-screen p-2 items-start gap-4 px-4 md:items-center md:gap-8 md:px-10">
+    <div className="grid min-h-screen p-2 items-start gap-4 px-4  md:gap-8 md:px-10">
       <div className="flex flex-col gap-2"></div>
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="grid gap-4 md:col-span-2">
-          <div className="flex items-center gap-4">
+        <div className="grid md:col-span-2 border-2 rounded-lg">
+          <div className="flex items-center gap-2 m-3 md:m-0">
             <h1 className="text-2xl font-semibold">Upcoming Events</h1>
-            <div className="ml-auto " size="sm">
+            <div className="ml-auto  md:mr-4" size="sm">
               <Button
                 onClick={() => {
                   navigate("/events/CreateEvent");
                 }}
-                className="ml-auto"
+                className="ml-auto "
                 size="sm"
               >
                 Create New Event
               </Button>
             </div>
           </div>
-          <Link className="mr-auto underline " size="sm" to="all">
-            All Events
-          </Link>
-          <Link className="ml-auto underline" to="upcoming">
-            View all
-          </Link>
-          {sortedAndSlicedEvents?.map((event) => {
-            // Parse the event date
-            const eventStartDate = parseISO(event.startDate);
-            const eventEndDate = parseISO(event.endDate);
-            // Calculate duration until the event
-            const duration = intervalToDuration({
-              start: new Date(),
-              end: eventStartDate,
-            });
+          <div className="flex px-4">
+            <Link className="mr-auto underline " size="sm" to="all">
+              All Events
+            </Link>
+            <Link className=" underline" to="upcoming">
+              View all
+            </Link>
+          </div>
 
-            return (
-              <Card key={event._id}>
-                <CardContent
-                  onClick={() => {
-                    navigate(`/events/${event.id}`);
-                  }}
-                  className="flex items-center gap-4 cursor-pointer mt-4"
-                >
-                  <img
-                    alt="Event"
-                    className="rounded-lg aspect-square object-cover "
-                    height="120"
-                    // style={{
-                    //   backgroundImage: event?.backgroundImage
-                    //     ? `url('${event.backgroundImage}')`
-                    //     : "url('https://images.pexels.com/photos/2342400/pexels-photo-2342400.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
-                    // }}
-                    src={
-                      event?.backgroundImage
-                        ? `${event?.backgroundImage}`
-                        : "/src/assets/16749.jpg"
-                    }
-                    width="120"
-                  />
-                  <div className="grid gap-2">
-                    <h2 className="text-xl font-semibold">{event.title}</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Start: {format(eventStartDate, "MMMM dd, yyyy")}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      End: {format(eventEndDate, "MMMM dd, yyyy")}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {event.location}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {`${duration.days || 0} days ${
-                        duration.hours || 0
-                      } hours ${duration.minutes || 0} minutes`}
-                    </p>
-                  </div>
-                  <Button
+          <div className="">
+            {sortedAndSlicedEvents?.map((event) => {
+              // Parse the event date
+              const eventStartDate = parseISO(event.startDate);
+              const eventEndDate = parseISO(event.endDate);
+              // Calculate duration until the event
+              const duration = intervalToDuration({
+                start: new Date(),
+                end: eventStartDate,
+              });
+
+              return (
+                <Card key={event._id}>
+                  <CardContent
                     onClick={() => {
                       navigate(`/events/${event.id}`);
                     }}
-                    className="ml-auto"
-                    size="sm"
+                    className="flex items-center border gap-4 cursor-pointer  pt-5"
                   >
-                    View
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
-
+                    <img
+                      alt="Event"
+                      className="rounded-lg aspect-square object-cover "
+                      height="120"
+                      // style={{
+                      //   backgroundImage: event?.backgroundImage
+                      //     ? `url('${event.backgroundImage}')`
+                      //     : "url('https://images.pexels.com/photos/2342400/pexels-photo-2342400.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+                      // }}
+                      src={
+                        event?.backgroundImage
+                          ? `${event?.backgroundImage}`
+                          : "/assets/16749.jpg"
+                      }
+                      width="120"
+                    />
+                    <div className="grid gap-2">
+                      <h2 className="text-xl font-semibold">{event.title}</h2>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Start: {format(eventStartDate, "MMMM dd, yyyy")}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        End: {format(eventEndDate, "MMMM dd, yyyy")}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {event.location}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {`${duration.days || 0} days ${
+                          duration.hours || 0
+                        } hours ${duration.minutes || 0} minutes`}
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        navigate(`/events/${event.id}`);
+                      }}
+                      className="ml-auto"
+                      size="sm"
+                    >
+                      View
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
           {/* <Card>
             <CardContent className="flex items-center gap-4">
               <img
@@ -265,7 +269,7 @@ export default function Events() {
             </CardContent>
           </Card> */}
         </div>
-        <div className="grid gap-4">
+        <div className="grid gap-5 md:col-span-1 ">
           <Card>
             <CardHeader className="flex items-center gap-4">
               <h2 className="text-base font-semibold">Today's Events</h2>
@@ -292,7 +296,7 @@ export default function Events() {
                       alt="Event"
                       className="rounded-lg aspect-square object-cover"
                       height="96"
-                      src="/src/assets/conferenc.webp"
+                      src="/assets/conferenc.webp"
                       width="96"
                     />
                     <div className="grid gap-2">
@@ -376,7 +380,7 @@ export default function Events() {
                       alt="Event image"
                       className="rounded-lg aspect-square object-cover"
                       height="96"
-                      src="/src/assets/16749.jpg"
+                      src="/assets/16749.jpg"
                       width="96"
                     />
                     <div className="grid gap-2">
@@ -410,110 +414,6 @@ export default function Events() {
           </Card>
         </div>
       </div>
-      {/* <div className="grid gap-4">
-        <Card>
-          <CardHeader className="flex items-center gap-4">
-            <h2 className="text-base font-semibold">Recent Orders</h2>
-            <Link className="ml-auto underline" href="#">
-              View all
-            </Link>
-          </CardHeader>
-          <CardContent className="p-0">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[100px]">Order</TableHead>
-                  <TableHead>Items</TableHead>
-                  <TableHead>Customer</TableHead>
-                  <TableHead className="text-right">Total</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">ORD001</TableCell>
-                  <TableCell>2x General Admission</TableCell>
-                  <TableCell>John Doe</TableCell>
-                  <TableCell className="text-right">$100.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">ORD002</TableCell>
-                  <TableCell>1x VIP Pass</TableCell>
-                  <TableCell>Jane Smith</TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">ORD003</TableCell>
-                  <TableCell>3x Family Package</TableCell>
-                  <TableCell>Mike Johnson</TableCell>
-                  <TableCell className="text-right">$300.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">ORD004</TableCell>
-                  <TableCell>1x Early Bird Ticket</TableCell>
-                  <TableCell>Emily Brown</TableCell>
-                  <TableCell className="text-right">$50.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">ORD005</TableCell>
-                  <TableCell>4x Group Discount</TableCell>
-                  <TableCell>Andrew Wilson</TableCell>
-                  <TableCell className="text-right">$200.00</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex items-center gap-4">
-            <h2 className="text-base font-semibold">Top Selling Tickets</h2>
-            <Link className="ml-auto underline" href="#">
-              View all
-            </Link>
-          </CardHeader>
-          <CardContent className="p-0">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[100px]">Ticket</TableHead>
-                  <TableHead>Quantity</TableHead>
-                  <TableHead>Revenue</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">VIP Pass</TableCell>
-                  <TableCell>120</TableCell>
-                  <TableCell>$12,000.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    Backstage Access
-                  </TableCell>
-                  <TableCell>100</TableCell>
-                  <TableCell>$10,000.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Family Package</TableCell>
-                  <TableCell>90</TableCell>
-                  <TableCell>$8,100.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Group Discount</TableCell>
-                  <TableCell>80</TableCell>
-                  <TableCell>$6,400.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    General Admission
-                  </TableCell>
-                  <TableCell>200</TableCell>
-                  <TableCell>$10,000.00</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </div> */}
     </div>
   );
 }

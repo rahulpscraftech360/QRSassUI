@@ -47,7 +47,7 @@ export default function Menu() {
 
   return (
     <div
-      className={`grid  max-h-screen  md:grid-cols-[${
+      className={`grid    md:grid-cols-[${
         isCollapsed ? "80px" : "!180px"
       }_1fr] `}
     >
@@ -80,8 +80,8 @@ export default function Menu() {
               </Button>
             )}
           </div>
-          <div className="flex-1 overflow-auto py-2">
-            <nav className="grid items-start px-4 text-sm font-medium">
+          <div className="flex-1 overflow-auto py-2 ">
+            <nav className="grid items-start px-4 gap-10 text-sm font-medium">
               <Link
                 className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
                 to="/"

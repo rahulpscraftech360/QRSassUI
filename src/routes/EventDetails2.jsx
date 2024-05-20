@@ -19,9 +19,9 @@ import axios from "../utils/axiosConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { addEventData } from "@/utils/eventDataSlice";
 
-import { formatDate } from "./../utils/formatDate";
+import { formatDate } from "../utils/formatDate";
 import EventStatus from "@/components/Event Status";
-import IncompleteDataTable from "./../components/IncompleteDataTable";
+import IncompleteDataTable from "../components/IncompleteDataTable";
 import ParticipantDataTable from "@/components/ParticipantDataTable";
 import UpdateEvent from "@/components/UpdateEvent";
 import {
@@ -45,8 +45,10 @@ import {
 import NotificationModal from "./NotificationModal";
 import AgendaModal from "./AgendaModal";
 import { format } from "date-fns";
+import DeleteEventModal from "./DeleteEventModal";
+import { dark } from "@clerk/themes";
 
-export default function EventDetails() {
+export default function EventDetails2() {
   const params = useParams();
   const navigate = useNavigate();
   console.log("ideeeeeeeeeeeeeeeeeeeee<<<<<<<<<<<", params.eventId);
@@ -173,102 +175,7 @@ export default function EventDetails() {
               {formatDate(eventData?.endDate)}
             </p>
           </div>
-          <div className="flex space-x-2 flex-col sm:flex-row  space-y-2 md:mr-auto">
-            {status !== "Completed" && <InvitationOptionsModal />}{" "}
-            {status !== "Completed" && (
-              <Button
-                onClick={() => {
-                  navigate("addParticipants");
-                }}
-                size="lg"
-                variant="outline"
-              >
-                <UserPlusIcon className="w-4 h-4 mr-2 inline-block" />
-                Add Participants
-              </Button>
-            )}
-            {status !== "Completed" && (
-              <Button
-                onClick={() => {
-                  navigate("tabPreview");
-                }}
-                size="lg"
-                variant="outline"
-              >
-                <ScanLine className="w-4 h-4 mr-2 inline-block" />
-                Scanner Template
-              </Button>
-            )}
-            {status !== "Completed" && (
-              <Button
-                onClick={() => {
-                  navigate("addTicket");
-                }}
-                size="lg"
-                variant="outline"
-              >
-                <TicketIcon className="w-4 h-4 mr-2 inline-block" />
-                Add Ticket
-              </Button>
-            )}
-            {status !== "Completed" && (
-              <Button
-                onClick={() => {
-                  navigate("addSubEvent");
-                }}
-                size="lg"
-                variant="outline"
-              >
-                <TicketIcon className="w-4 h-4 mr-2 inline-block" />
-                Add SubEvent
-              </Button>
-            )}
-            <Button
-              onClick={() => {
-                navigate(`/events/share/${eventId}`);
-              }}
-              size="lg"
-              variant="outline"
-            >
-              <UserPlusIcon className="w-4 h-4 mr-2 inline-block" />
-              Share
-            </Button>
-            {/* <Button
-              onClick={() => {
-                handleDelete(`${eventId}`);
-              }}
-              size="lg"
-              variant="outline"
-            >
-              <DeleteIcon className="w-4 h-4 mr-2 inline-block" />
-              Delete
-            </Button> */}
-            <AlertDialog className=" ">
-              <AlertDialogTrigger className="px-2 border-1 border-white">
-                <DeleteIcon className=" bg-w-4 h-4 mr-2 inline-block" />
-                Delete
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    the Event and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      handleDelete(`${eventId}`);
-                    }}
-                  >
-                    Continue
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
+          <div className="flex space-x-2 flex-col sm:flex-row  space-y-2 md:mr-auto"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] items-start gap-4 md:items-center lg:gap-8">
           <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-1fr_2">
@@ -286,7 +193,7 @@ export default function EventDetails() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container ">
         <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -296,44 +203,110 @@ export default function EventDetails() {
               <p>{eventData.description}</p>
             </div>
           </div>
-          <div className="space-y-4  md:items-center flex  flex-col ">
-            <div className="container">
-              <div className="flex flex-col gap-4 min-[400px]:flex-row">
-                {status !== "Completed" && (
-                  <Button
-                    onClick={() => {
-                      console.log("Updated");
-                      navigate(`/events/update/${eventData.id}`); // Use history.push for redirection
-                    }}
-                    className="w-auto"
-                    variant="outline"
-                  >
-                    <FileEditIcon className="w-4 h-4 mr-2 inline-block" />{" "}
-                    Update Event
-                  </Button>
-                )}
+          <div className="space-y-4  items-center flex  flex-col ">
+            <div className=" flex gap-2  justify-between w-1/2 sm:w-full">
+              {status !== "Completed" && <InvitationOptionsModal />}{" "}
+              {status !== "Completed" && (
+                <Button
+                  onClick={() => {
+                    navigate("addParticipants");
+                  }}
+                  size="lg"
+                  variant="outline"
+                >
+                  <UserPlusIcon className="w-4 h-4 mr-2 inline-block" />
+                  Add Participants
+                </Button>
+              )}
+              {status !== "Completed" && (
+                <Button
+                  onClick={() => {
+                    navigate("tabPreview");
+                  }}
+                  size="lg"
+                  variant="outline"
+                >
+                  <ScanLine className="w-4 h-4 mr-2 inline-block" />
+                  Scanner Template
+                </Button>
+              )}
+            </div>
+            <div className="flex gap-2 justify-between  w-1/2 sm:w-full">
+              {status !== "Completed" && (
+                <Button
+                  onClick={() => {
+                    navigate("addTicket");
+                  }}
+                  size="lg"
+                  variant="outline"
+                >
+                  <TicketIcon className="w-4 h-4 mr-2 inline-block" />
+                  Add Ticket
+                </Button>
+              )}
+              <Button
+                onClick={() => {
+                  navigate(`/events/share/${eventId}`);
+                }}
+                size="lg"
+                variant="outline"
+              >
+                <UserPlusIcon className="w-4 h-4 mr-2 inline-block" />
+                Share
+              </Button>
+              {/* <Button
+              onClick={() => {
+                handleDelete(`${eventId}`);
+              }}
+              size="lg"
+              variant="outline"
+            >
+              <DeleteIcon className="w-4 h-4 mr-2 inline-block" />
+              Delete
+            </Button> */}
+              <Button size="lg" variant="outline">
+                <DeleteIcon className="w-4 h-4 mr-2 inline-block" />
+                <DeleteEventModal eventId={eventData.id} />
+              </Button>
+
+              {status !== "Completed" && (
+                <Button
+                  onClick={() => {
+                    console.log("Updated");
+                    navigate(`/events/update/${eventData.id}`); // Use history.push for redirection
+                  }}
+                  size="lg"
+                  variant="outline"
+                >
+                  <FileEditIcon className="w-4 h-4 mr-2 inline-block" /> Update
+                  Event
+                </Button>
+              )}
+            </div>
+            <div className=" flex gap-2 justify-between   w-1/2 sm:w-full">
+              {status !== "Completed" && (
                 <Button
                   onClick={() => {
                     console.log("navigate");
                     navigate(`/scan/events/${eventData.id}`);
                   }}
-                  className="w-full md:w-auto"
+                  size="lg"
                   variant="outline"
                 >
                   <UsersIcon className="w-4 h-4 mr-2 inline-block" />
                   Scan QR Codes
                 </Button>
-              </div>
+              )}
               {status !== "Completed" && <NotificationModal />}{" "}
-              {status !== "Completed" && <AgendaModal agenda={eventData} />}{" "}
+              {status !== "Completed" && <AgendaModal agenda={eventData} />}
             </div>
-            {/* <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+          </div>
+          {/* <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Location
             </h2>
             <div className="prose max-w-none">
               <p>{eventData.location}</p>
             </div> */}
-          </div>
         </div>
       </div>
 

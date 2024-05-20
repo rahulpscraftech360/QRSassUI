@@ -3,6 +3,7 @@ services:
   react-app:
     container_name: react-app
     build: .
+    image: rahulpscraftech360/myreactapp:latest # Updated to include Docker Hub repo
     ports:
       - "5173:5173"
     volumes:

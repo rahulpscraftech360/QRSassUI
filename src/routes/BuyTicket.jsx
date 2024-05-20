@@ -90,7 +90,7 @@ const BuyTicket = () => {
       try {
         const response = await fetch(
           // `http://localhost:5000/v1/razorpay/check-payment-status`,
-          `http://64.227.172.82:5000/v1/razorpay/check-payment-status`,
+          `http://165.22.208.201:5000/v1/razorpay/check-payment-status`,
           {
             method: "POST", // Specify the method
             headers: {

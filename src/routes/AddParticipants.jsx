@@ -100,7 +100,7 @@ export default function AddParticipants() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto my-8 p-6  rounded-lg shadow-md">
       <h1 className="text-4xl font-bold mb-6">Add Participants</h1>
       {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
       <div className="mb-6">

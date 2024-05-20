@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   PopoverTrigger,
@@ -16,27 +16,35 @@ const TimePicker = (setTime, time) => {
   const [hour, setHour] = React.useState("");
   const [minute, setMinute] = React.useState("");
   const [period, setPeriod] = React.useState("");
-
+  console.log(">>>>>>>>>", hour, minute, period);
   const handleHourChange = (value) => {
+    console.log("handleHourChange");
     setHour(value);
-    updateTime(hour, value, period);
+    updateTime(value, minute, period); // Pass the updated value directly
   };
-
   const handleMinuteChange = (value) => {
+    console.log("handleMinuteChange");
     setMinute(value);
-    updateTime(minute, value, period);
+    updateTime(hour, value, period); // Pass the updated value directly
   };
 
   const handlePeriodChange = (value) => {
+    console.log("handlePeriodChange");
     setPeriod(value);
-    updateTime(period, minute, value);
+    updateTime(hour, minute, value); // Pass the updated value directly
   };
   console.log(time);
   const updateTime = (hour, minute, period) => {
     if (hour !== "" && minute !== "" && period !== "") {
-      setTime(`${hour}:${minute} ${period.toUpperCase()}`);
+      const newTime = `${hour}:${minute} ${period.toUpperCase()}`;
+      setTime(newTime);
+      console.log(newTime); // Log the updated time here
     }
   };
+
+  useEffect(() => {
+    console.log("Time updated:", time);
+  }, [time]);
 
   return (
     <Popover>
@@ -68,14 +76,27 @@ const TimePicker = (setTime, time) => {
             <SelectItem value="11">11</SelectItem>
             <SelectItem value="12">12</SelectItem>
           </SelectContent> */}
+          {/* <SelectContent position="popper">
+            {[...Array(12).keys()].map((i) => (
+              <SelectItem
+                key={i + 1}
+                value={i < 9 ? `0${i + 1}` : `${i + 1}`}
+                onChange={
+                  () => console.log("here", i)
+                  // handleHourChange(i < 9 ? `0${i + 1}` : `${i + 1}`)
+                }
+              >
+                {i < 9 ? `0${i + 1}` : `${i + 1}`}
+              </SelectItem>
+            ))}
+          </SelectContent> */}
+
           <SelectContent position="popper">
             {[...Array(12).keys()].map((i) => (
               <SelectItem
                 key={i + 1}
                 value={i < 9 ? `0${i + 1}` : `${i + 1}`}
-                onSelect={() =>
-                  handleHourChange(i < 9 ? `0${i + 1}` : `${i + 1}`)
-                }
+                onSelect={() => console.log("here", i)}
               >
                 {i < 9 ? `0${i + 1}` : `${i + 1}`}
               </SelectItem>

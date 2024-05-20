@@ -68,8 +68,8 @@ export default function HomePage() {
 
       // Send the session ID to your backend
       axios
-        // .post("http://localhost:5000/user", { sessionId })
-        .post("http://64.227.172.82:5000/user", { sessionId })
+        .post("http://localhost:5000/user", { sessionId })
+        // .post("http://165.22.208.201:5000/user", { sessionId })
 
         .then((response) => {
           console.log("response", response.data);
@@ -95,13 +95,14 @@ export default function HomePage() {
   }, [session]);
   const navigate = useNavigate();
   return (
-    <>
+    <div className="py-6 space-y-6 md:pl-16 mx-3">
       <div className="grid items-start  p-2 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20 xl:gap-24 px-4 md:px-6">
         <div className="space-y-4 ">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
               Welcome to Your Event Platform
             </h1>
+
             <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
               Everything you need to create amazing events. From small meetups
               to large conferences, we've got you covered. Easy to use. Powerful
@@ -132,7 +133,7 @@ export default function HomePage() {
             alt="Image"
             className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center"
             height="310"
-            src="/src/assets/defaultBackgroundImage.jpg"
+            src="/assets/defaultBackgroundImage.jpg"
             width="550"
           />
         </div>
@@ -388,7 +389,7 @@ export default function HomePage() {
           <Button size="sm">Create an Event</Button>
         </CardFooter>
       </Card>
-    </>
+    </div>
   );
 }
 

@@ -27,6 +27,9 @@ export default function SendEmailInvitation() {
   const [inputSubject, setInputSubject] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const [imageFile, setImageFile] = useState(null);
+  console.log(">>img>>>", imageFile);
   const [style, setStyle] = useState();
   const uploadProps = {
     name: "file",
@@ -57,6 +60,8 @@ export default function SendEmailInvitation() {
       const firstFileBlobUrl = Files[0]; // Adjust if 'Files' is not an array
       const file = await blobUrlToFile(firstFileBlobUrl);
       // setSelectedFile(file);
+      setImageFile(file);
+
       let a = JSON.stringify(file);
       console.log(">>>>>>>>>>>>", a);
     })();
@@ -120,8 +125,12 @@ export default function SendEmailInvitation() {
     if (file) {
       console.log(file);
       setSelectedFile(file);
+      // convertImageToBase64(file);
+      console.log(">>>>>>>>>>>>>>>>>>>>>>>", file);
+      setImageFile(file);
     }
   };
+
   const handleButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -132,7 +141,7 @@ export default function SendEmailInvitation() {
     <>
       <h1 className="text-4xl font-bold mb-3  p-6">Email Invitation</h1>
       <div className="flex flex-col lg:flex-row lg:space-x-6 max-w-6xl mx-auto p-6">
-        <div className="flex-1  mt-6 lg:mt-0  lg:h-100vh  ">
+        <div className="flex-1  bg-red-  mt-6 lg:mt-0  lg:h-100vh  mb-5">
           <h2 className="text-xl font-semibold mb-4 gap-2 ">Upload Image</h2>
           <Card className="border-2 border-dashed bg-muted hover:cursor-pointer hover:border-muted-foreground/50">
             <CardContent
@@ -158,19 +167,6 @@ export default function SendEmailInvitation() {
               </div>
             </CardContent>
           </Card>
-
-          {/* <Dropzone onChange={setFiles} className="w-full" /> */}
-
-          {/* <div className="border-dashed border-2 border-gray-300 p-6 text-center mb-3">
-          <UploadIcon className=" w-12 h-12 mx-auto mb-3" />
-          <p>Click or drag file to this area to upload</p>
-        </div> */}
-          {/* <div className="space-y-2 mb-3">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-500">login screen.png</p>
-            <FileIcon className="text-gray-500 w-4 h-4" />
-          </div>
-        </div> */}
 
           <div className="flex flex-col space-y-1.5 mb-4">
             <label className="text-sm font-medium" htmlFor="subject">
@@ -198,11 +194,15 @@ export default function SendEmailInvitation() {
           </div>
         </div>
         {
-          <div className="flex-1 mt-6 lg:mt-0">
+          <div className=" flex-1 mt-6 lg:mt-0 ">
             <h2 className="text-xl font-semibold mb-4">Preview</h2>
 
             {backgroundImage && (
-              <HtmlTempate backgroundImage={backgroundImage} style={style} />
+              <HtmlTempate
+                backgroundImage={backgroundImage}
+                style={style}
+                imageFile={imageFile}
+              />
             )}
 
             {!backgroundImage && (
@@ -211,55 +211,6 @@ export default function SendEmailInvitation() {
                 <div></div>
               </div>
             )}
-            {/* <div className="relative mb-4">
-            <img
-              alt="Background"
-              className="w-full h-auto"
-              height="300"
-              src={
-                "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg"
-              }
-              style={{
-                aspectRatio: "500/300",
-                objectFit: "cover",
-              }}
-              width="500"
-            />
-            <div className="absolute inset-0 flex justify-center items-center">
-              <QrCodeIcon className="text-black w-24 h-24" />
-            </div>
-          </div> */}
-            {/* <div className="flex items-center space-x-3 mb-3">
-            <label className="text-sm" htmlFor="horizontal-position">
-              Horizontal Position:
-            </label>
-            <input
-              className="w-full"
-              id="horizontal-position"
-              max="100"
-              min="0"
-              name="horizontal-position"
-              type="range"
-              value="50"
-            />
-            <span className="text-sm">50%</span>
-          </div>
-          <div className="flex items-center space-x-3 mb-6">
-            <label className="text-sm" htmlFor="vertical-position">
-              Vertical Position:
-            </label>
-            <input
-              className="w-full"
-              id="vertical-position"
-              max="100"
-              min="0"
-              name="vertical-position"
-              type="range"
-              value="50"
-            />
-            <span className="text-sm">50%</span>
-          </div>
-          <Button className="w-full">Send Email</Button> */}
           </div>
         }
       </div>

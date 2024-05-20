@@ -47,6 +47,12 @@ import AddTickets from "./routes/AddTickets";
 import Ticket from "./routes/Ticket";
 import RazorpayConnect from "./routes/RazorpayConnect";
 import QRCodeScanner from "./routes/QRCodeScanner";
+import SendWhatsappNotification from "./routes/SendWhatsappNotification";
+import SendEmailNotification from "./routes/sendEmailNotification";
+import ImageEditor from "./routes/ImageEditor";
+import QRCodeScanner2 from "./routes/QRCodeScanner2";
+import EventDetails2 from "./routes/EventDetails2";
+import AddSubEvent from "./routes/AddSubEvent";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = useIsAuthenticated();
@@ -78,8 +84,12 @@ const router = createBrowserRouter([
         element: <MainPage />,
         path: "Home",
       },
+      // {
+      //   element: <ProtectedRoute component={Events} />,
+      //   path: "events",
+      // },
       {
-        element: <ProtectedRoute component={Events} />,
+        element: <Events />,
         path: "events",
       },
       {
@@ -89,6 +99,10 @@ const router = createBrowserRouter([
       {
         element: <EventDetails />,
         path: "events/:eventId",
+      },
+      {
+        element: <EventDetails2 />,
+        path: "events/1/:eventId",
       },
       {
         element: <EditEvent />,
@@ -107,6 +121,10 @@ const router = createBrowserRouter([
         path: "events/:eventId/addParticipants",
       },
       {
+        element: <AddSubEvent />,
+        path: "events/:eventId/addSubEvent",
+      },
+      {
         element: <AddTickets />,
         path: "events/:eventId/addTicket",
       },
@@ -117,6 +135,14 @@ const router = createBrowserRouter([
       {
         element: <BuyTicket />,
         path: "events/:eventId/buyTicket",
+      },
+      {
+        element: <SendEmailNotification />,
+        path: "events/:eventId/sendEmailNotification",
+      },
+      {
+        element: <SendWhatsappNotification />,
+        path: "events/:eventId/sendWhatsappNotification",
       },
       {
         element: <AllEvents />,
@@ -172,6 +198,10 @@ const router = createBrowserRouter([
       {
         element: <RazorpayConnect />,
         path: "account/razorpay/connect",
+      },
+      {
+        element: <ImageEditor />,
+        path: "editImage",
       },
       { path: "*", element: <NotFoundPage /> },
     ],

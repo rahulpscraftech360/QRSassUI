@@ -1,61 +1,53 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Template</title>
     <style>
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-      }
-      #htmltoimage {
-        display: flex;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        height: 844px;
-        width: auto;
-        position: relative; /* Added position relative to the parent container */
-      }
-      .backgroundImage {
-        background-image: url("/src/assets/emaitemplate.jpg");
-        background-color: blue;
-        background-repeat: no-repeat !important;
-        background-size: cover;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }
-      .overlayImage {
-        width: 150px;
-        height: auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
+
+    #htmltoimage {
+      text-align: center;
+      width: auto; /* Adjust the width as needed */
+      height: full; /* Adjust the height as needed */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .backgroundImage {
+      width: auto; /* Match the container width */
+      height: full; /* Match the container height */
+      background-size: cover; /* Ensures the background image covers the entire container */
+      background-repeat: no-repeat;
+    }
+
+    .overlayImage {
+      max-width:250px; /* Adjust the size as needed */
+      max-height: 250px; /* Adjust the size as needed */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     </style>
-  </head>
-  <body>
-    <div id="htmltoimage">
-      <!-- <div class="backgroundImage"></div>
-      <img
-        class="overlayImage"
-        src="/src/assets/qr-code.png"
-        alt="overlay image"
-      /> -->
-      <iframe
-        id="nutworth-1583483774488"
-        src=" https://7522-124-40-247-18.ngrok-free.app/events/share/661927f5e9bcfb17003b6b4c"
-        width="100%"
-        height="300px"
-        frameborder="0"
-        onload="nutworth_1583483774488()"
-      ></iframe>
-    </div>
-  </body>
+</head>
+<body>
+  
+  
+  <div >
+          <img class="backgroundImage" src="https://firebasestorage.googleapis.com/v0/b/qr-code-7944d.appspot.com/o/images%2F1714973754021?alt=media&token=4fc5ea32-a2cd-4ea4-a5f4-10e61d83e54d" alt="background image">
+          <img class="overlayImage" src="{{image}}"
+               style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      </div>
+</body>
+</body>
 </html>
+  
+`

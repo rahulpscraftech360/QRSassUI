@@ -1,17 +1,5 @@
-// import React from "react";
-
-// const SendWhatsappInvitation = () => {
-//   return <div>SendWhatsappInvitation</div>;
-// };
-
-// export default SendWhatsappInvitation;
-
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/QBq0uE3vQ89
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Dropzone } from "../components/Dropzone";
 import { useState } from "react";
@@ -26,7 +14,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import WhatsappTempate from "@/components/WhatsappTemplate";
 import WhatsappTemplate from "@/components/WhatsappTemplate";
-export default function SendWhatsappInvitation() {
+import { useNavigate } from "react-router-dom";
+export default function SendEmailNotification() {
   const [Files, setFiles] = useState([]);
   //console.log("files", Files);
   const [backgroundImage, setBackgroundImage] = useState(null);
@@ -37,6 +26,17 @@ export default function SendWhatsappInvitation() {
   const [inputSubject, setInputSubject] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+  const handleSubjectChange = (event) => {
+    setSubject(event.target.value);
+  };
+
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  };
+
   const uploadProps = {
     name: "file",
     multiple: false,
@@ -136,12 +136,56 @@ export default function SendWhatsappInvitation() {
     }
   };
 
+  const sendToBackend = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/v1/notification/email",
+        {
+          data: {
+            content: {
+              subject: subject,
+              body: message,
+            },
+            eventData,
+          },
+        }
+      );
+
+      // Log the response
+      console.log("Response from the server:", response);
+      if (response.status === 201) {
+        // Handle the updated HTML received from the backend
+
+        toast({
+          // variant: "destructive",
+          title: "Success! Email Invitation task added.",
+          // description: "An error occurred while creating the event",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "An error occurred while creating the event",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+        // console.error("Failed to update HTML on the backend.");
+      }
+    } catch (error) {
+      console.error("Error updating HTML:", error);
+    }
+  };
+
+  const SendEmailNotification = () => {
+    sendToBackend();
+    navigate("/tasks");
+  };
+
   return (
     <>
-      <h1 className="text-4xl font-bold mb-3  p-6">Whatsapp Invitation</h1>
+      <h1 className="text-4xl font-bold mb-3  p-6">Email Notification</h1>
       <div className="flex flex-col lg:flex-row lg:space-x-6 max-w-6xl mx-auto p-6">
         <div className="flex-1 mt-6 lg:mt-0 flex flex-col justify-between   ">
-          <h2 className="text-xl font-semibold mb-4 gap-2 ">Upload Image</h2>
+          {/* <h2 className="text-xl font-semibold mb-4 gap-2 ">Upload Image</h2>
           <Card className="border-2 border-dashed bg-muted hover:cursor-pointer hover:border-muted-foreground/50 ">
             <CardContent
               onClick={handleButtonClick}
@@ -165,7 +209,7 @@ export default function SendWhatsappInvitation() {
                 />
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* <Dropzone onChange={setFiles} className="w-full" /> */}
 
@@ -184,16 +228,29 @@ export default function SendWhatsappInvitation() {
             <label className="text-sm font-medium" htmlFor="subject">
               Write Subject
             </label>
-            <Input id="subject" placeholder="Subject" />
+            <Input
+              id="subject"
+              type="text"
+              placeholder="Subject"
+              value={subject}
+              onChange={handleSubjectChange}
+              className="input"
+            />
           </div>
           <div className="flex flex-col space-y-1.5 mb-4">
             <label className="text-sm font-medium" htmlFor="subject">
               Write Message
             </label>
-            <Textarea id="Message" placeholder="Message" />
+            <Textarea
+              id="message"
+              placeholder="Message"
+              value={message}
+              onChange={handleMessageChange}
+              className="textarea"
+            />
           </div>
           <div className="">
-            <Button
+            {/* <Button
               className="w-full   mt-14 "
               onClick={handleImageUpload}
               disabled={isUploading}
@@ -202,76 +259,79 @@ export default function SendWhatsappInvitation() {
               {isUploading
                 ? `Uploading...${uploadProgress}% done`
                 : "Start Upload"}
+            </Button> */}
+            <Button className="w-full   mt-14 " onClick={SendEmailNotification}>
+              Send Notification
             </Button>
           </div>
         </div>
         {
-          <div className="flex-1 mt-6 lg:mt-0 ">
-            <h2 className="text-xl font-semibold mb-4 ">Preview</h2>
-            {backgroundImage && (
-              <WhatsappTemplate
-                backgroundImage={
-                  backgroundImage
-                  // "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg"
-                }
-              />
-            )}
-            {!backgroundImage && (
-              <div className="w-full h-[50vh] border-2 flex  justify-center items-center  rounded-sm border-dashed bg-muted hover:cursor-pointer hover:border-muted-foreground/50">
-                <div className="">No Image Selected</div>
-                <div></div>
-              </div>
-            )}
-            {/* <div className="relative mb-4">
-            <img
-              alt="Background"
-              className="w-full h-auto"
-              height="300"
-              src={
-                "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg"
-              }
-              style={{
-                aspectRatio: "500/300",
-                objectFit: "cover",
-              }}
-              width="500"
-            />
-            <div className="absolute inset-0 flex justify-center items-center">
-              <QrCodeIcon className="text-black w-24 h-24" />
-            </div>
-          </div> */}
-            {/* <div className="flex items-center space-x-3 mb-3">
-            <label className="text-sm" htmlFor="horizontal-position">
-              Horizontal Position:
-            </label>
-            <input
-              className="w-full"
-              id="horizontal-position"
-              max="100"
-              min="0"
-              name="horizontal-position"
-              type="range"
-              value="50"
-            />
-            <span className="text-sm">50%</span>
-          </div>
-          <div className="flex items-center space-x-3 mb-6">
-            <label className="text-sm" htmlFor="vertical-position">
-              Vertical Position:
-            </label>
-            <input
-              className="w-full"
-              id="vertical-position"
-              max="100"
-              min="0"
-              name="vertical-position"
-              type="range"
-              value="50"
-            />
-            <span className="text-sm">50%</span>
-          </div>
-          <Button className="w-full">Send Email</Button> */}
-          </div>
+          // <div className="flex-1 mt-6 lg:mt-0 flex flex-col w-1/2">
+          //   <h2 className="text-xl font-semibold mb-4 ">Preview</h2>
+          //   {backgroundImage && (
+          //     <WhatsappTemplate
+          //       backgroundImage={
+          //         backgroundImage
+          //         // "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg"
+          //       }
+          //     />
+          //   )}
+          //   {!backgroundImage && (
+          //     <div className="w-full h-[50vh] border-2 flex  justify-center items-center  rounded-sm border-dashed bg-muted hover:cursor-pointer hover:border-muted-foreground/50">
+          //       <div className="">No Image Selected</div>
+          //       <div></div>
+          //     </div>
+          //   )}
+          //   {/* <div className="relative mb-4">
+          //   <img
+          //     alt="Background"
+          //     className="w-full h-auto"
+          //     height="300"
+          //     src={
+          //       "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg"
+          //     }
+          //     style={{
+          //       aspectRatio: "500/300",
+          //       objectFit: "cover",
+          //     }}
+          //     width="500"
+          //   />
+          //   <div className="absolute inset-0 flex justify-center items-center">
+          //     <QrCodeIcon className="text-black w-24 h-24" />
+          //   </div>
+          // </div> */}
+          //   {/* <div className="flex items-center space-x-3 mb-3">
+          //   <label className="text-sm" htmlFor="horizontal-position">
+          //     Horizontal Position:
+          //   </label>
+          //   <input
+          //     className="w-full"
+          //     id="horizontal-position"
+          //     max="100"
+          //     min="0"
+          //     name="horizontal-position"
+          //     type="range"
+          //     value="50"
+          //   />
+          //   <span className="text-sm">50%</span>
+          // </div>
+          // <div className="flex items-center space-x-3 mb-6">
+          //   <label className="text-sm" htmlFor="vertical-position">
+          //     Vertical Position:
+          //   </label>
+          //   <input
+          //     className="w-full"
+          //     id="vertical-position"
+          //     max="100"
+          //     min="0"
+          //     name="vertical-position"
+          //     type="range"
+          //     value="50"
+          //   />
+          //   <span className="text-sm">50%</span>
+          // </div>
+          // <Button className="w-full">Send Email</Button> */}
+          // </div>
         }
       </div>
     </>

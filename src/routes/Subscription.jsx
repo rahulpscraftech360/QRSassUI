@@ -95,7 +95,7 @@ const Subscription = () => {
       try {
         const response = await fetch(
           // `http://localhost:5000/v1/organizations/${orgId}/checkSubscription`,
-          `http://64.227.172.82:5000/v1/organizations/${orgId}/checkSubscription`,
+          `http://165.22.208.201:5000/v1/organizations/${orgId}/checkSubscription`,
           {
             method: "GET",
             headers: {
@@ -147,7 +147,7 @@ const Subscription = () => {
       setSubscriptionData(null);
       const response = await axios.post(
         // "http://localhost:5000/v1/razorpay/razorpay-webappSubscription",
-        "http://64.227.172.82:5000/v1/razorpay/razorpay-webappSubscription",
+        "http://165.22.208.201:5000/v1/razorpay/razorpay-webappSubscription",
         {
           organization,
           plan,
@@ -256,9 +256,9 @@ const Subscription = () => {
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-2 text-center">
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
+            {/* <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
               Plans
-            </div>
+            </div> */}
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
               Choose the perfect plan for your team
             </h2>
@@ -274,7 +274,7 @@ const Subscription = () => {
             <div
               key={price.id}
               onClick={() => handlePlanChange(price)}
-              className="flex flex-col rounded-lg border border-gray-100 border-gray-100 overflow-hidden shadow-sm bg-white dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950"
+              className="flex flex-col rounded-lg border border-gray-100 overflow-hidden shadow-sm bg-white  dark:border-gray-800 dark:bg-gray-950"
             >
               <div className="grid gap-4 p-6">
                 <h3 className="text-xl font-semibold">{price.name}</h3>

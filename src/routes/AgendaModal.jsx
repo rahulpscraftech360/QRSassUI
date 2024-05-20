@@ -24,9 +24,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
+import AgendaForm from "./../components/AgendaForm";
+import { useState } from "react";
 
-export default function InvitationOptionsModal() {
-  const [open, setOpen] = React.useState(false);
+export default function AgendaModal() {
+  const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const navigate = useNavigate();
 
@@ -35,18 +37,16 @@ export default function InvitationOptionsModal() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button className="" size="lg" variant="outline">
-            <MailIcon className="w-4 h-4  inline-block" />
-            Send Invitations
+            <MailIcon className="w-4 h-4 mr-2 inline-block" />
+            Add Agenda
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[700px]">
           <DialogHeader>
-            <DialogTitle>Send Invitation</DialogTitle>
-            {/* <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription> */}
+            <AgendaForm />
           </DialogHeader>
-          <ProfileForm navigate={navigate} />
+
+          {/* <ProfileForm navigate={navigate} /> */}
         </DialogContent>
       </Dialog>
     );
@@ -57,17 +57,16 @@ export default function InvitationOptionsModal() {
       <DrawerTrigger asChild>
         <Button size="lg" variant="outline">
           <MailIcon className="w-4 h-4 mr-2 inline-block" />
-          Send Invitations
+          Add Agenda
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Send Invitation</DrawerTitle>
-          {/* <DrawerDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DrawerDescription> */}
+          {/* <DrawerTitle>Add Agenda</DrawerTitle> */}
+
+          <AgendaForm />
         </DrawerHeader>
-        <ProfileForm className="px-4" navigate={navigate} />
+
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -84,7 +83,7 @@ function ProfileForm({ className, navigate }) {
       <div className="grid gap-2">
         <Button
           onClick={() => {
-            navigate("sendEmailInvitation");
+            navigate("sendEmailNotification");
           }}
           size="lg"
           variant="outline"
@@ -97,7 +96,7 @@ function ProfileForm({ className, navigate }) {
         {" "}
         <Button
           onClick={() => {
-            navigate("sendWhatsappInvitation");
+            navigate("sendWhatsappNotification");
           }}
           size="lg"
           variant="outline"
@@ -107,7 +106,7 @@ function ProfileForm({ className, navigate }) {
         </Button>
       </div>
       <div className="grid gap-2">
-        <Button
+        {/* <Button
           onClick={() => {
             navigate("Download QRCode");
           }}
@@ -116,7 +115,7 @@ function ProfileForm({ className, navigate }) {
         >
           <MailIcon className="w-4 h-4 mr-2 inline-block" />
           Download QR
-        </Button>
+        </Button> */}
       </div>
     </form>
   );

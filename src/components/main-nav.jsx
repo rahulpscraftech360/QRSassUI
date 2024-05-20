@@ -13,17 +13,17 @@ export function MainNav() {
         </Link>
       </div>
       <Link
-        href="/"
+        to="/apps"
         className="text-sm font-medium transition-colors hover:text-primary"
       >
         Applications
       </Link>
-      <Link
+      {/* <Link
         href="/examples/dashboard"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Customers
-      </Link>
+      </Link> */}
       <Link
         href="/examples/dashboard"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary hidden sm:block"
@@ -31,6 +31,7 @@ export function MainNav() {
         Products
       </Link>
       <Link
+        to="settings"
         href="/examples/dashboard"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary hidden sm:block"
       >

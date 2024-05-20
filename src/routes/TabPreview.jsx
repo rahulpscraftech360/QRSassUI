@@ -180,8 +180,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import axios from "../utils/axiosConfig";
 import { useParams } from "react-router-dom";
 export default function TabPreview() {
-  const [verticalPosition, setVerticalPosition] = useState(25); // Initial vertical position
-  const [horizontalPosition, setHorizontalPosition] = useState(25); // Initial horizontal position
+  const [verticalPosition, setVerticalPosition] = useState(30); // Initial vertical position
+  const [horizontalPosition, setHorizontalPosition] = useState(35); // Initial horizontal position
   const [scannerSize, setScannerSize] = useState(50);
   const handleVerticalChange = (e) => {
     setVerticalPosition(e.target.value);
@@ -485,7 +485,7 @@ export default function TabPreview() {
                 alt="Preview"
                 className="rounded-lg"
                 height="300"
-                src="${`/src/assets/qr-code.png`}"
+                src="/assets/aZBF4vrb2Ds.jpg"
                 style={{
                   position: "relative",
                   aspectRatio: "500/300",
@@ -497,12 +497,13 @@ export default function TabPreview() {
             <div
               className="scanner"
               style={{
-                width: "100px", // Adjust if necessary
-                height: "100px",
+                width: "120px", // Adjust if necessary
+                height: "120px",
                 position: "absolute",
                 top: `${verticalPosition}%`,
                 left: `${horizontalPosition}%`,
                 border: "4px solid #ccc",
+                background: "black",
                 borderRadius: "8px",
                 overflow: "hidden",
               }}
@@ -512,7 +513,7 @@ export default function TabPreview() {
         <Button onClick={handleUploadScannerTemplate} className="w-full">
           Submit Template
         </Button>
-        `{verticalPosition}`
+        {/* `{verticalPosition}` */}
       </div>
     </div>
   );

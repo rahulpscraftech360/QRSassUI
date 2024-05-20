@@ -81,20 +81,20 @@ export default function SettingsPage() {
     fetchSubscription();
   }, []);
   return (
-    <div className="mx-auto max-w-5xl px-4">
+    <div className="w-full  shadow-md  px-4 md:gap-10 md:px-6">
       <div className="space-y-6">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold pt-24">Settings</h1>
+          <h1 className="text-3xl font-bold pt-10">Settings</h1>
           <p className="text-gray-500 dark:text-gray-400">
             Manage your account information and subscriptions
           </p>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="border rounded-lg">
             <div className="p-4 border-b dark:border-gray-800">
               <h2 className="text-lg font-bold">Account Information</h2>
             </div>
-            <div className="grid grid-cols-1 gap-4 p-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 ">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
                 <Input id="name" placeholder={organization?.name} required />
@@ -114,7 +114,7 @@ export default function SettingsPage() {
             </div>
           </div>
           <div className="border rounded-lg">
-            <Notion />
+            {/* <Notion /> */}
             <div className="p-4 border-b dark:border-gray-800">
               <h2 className="text-lg font-bold">Subscription</h2>
             </div>
@@ -167,7 +167,14 @@ export default function SettingsPage() {
                 <AppSubscriptionData key={app.id} app={app} />
               ))}
             </div>
-            <Button onClick={handleRazorpayConnect}>Connect Razorpay</Button>
+          </div>
+          <div className="border rounded-lg">
+            <div className="p-4 border-b dark:border-gray-800">
+              <h2 className="text-lg font-bold">Raozorpay</h2>
+            </div>
+            <div className=" flex  m-3 justify-center">
+              <Button onClick={handleRazorpayConnect}>Connect Razorpay</Button>{" "}
+            </div>
           </div>
         </div>
       </div>

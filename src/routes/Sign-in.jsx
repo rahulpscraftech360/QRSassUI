@@ -16,7 +16,7 @@ export default function SignInPage() {
       // Send the session ID to your backend
       axios
         // .post("http://localhost:5000/store-user", {
-        .post("http://64.227.172.82:5000/store-user", {
+        .post("http://localhost:5000/store-user", {
           body: JSON.stringify({ sessionId }),
         })
         .then((response) => {
@@ -37,7 +37,7 @@ export default function SignInPage() {
           alt="Image"
           className="aspect-2 object-cover rounded-lg"
           height="400"
-          src="/src/assets/aZBF4vrb2Ds.jpg"
+          src="/assets/aZBF4vrb2Ds.jpg"
           width="600"
         />
       </div>

@@ -37,7 +37,7 @@ export default function TaskUpdates() {
   console.log("first", tasks);
   useEffect(() => {
     // const eventSource = new EventSource("http://localhost:5000/events");
-    const eventSource = new EventSource("http://64.227.172.82:5000/events");
+    const eventSource = new EventSource("http://165.22.208.201:5000/events");
 
     eventSource.onmessage = (event) => {
       const data = JSON.parse(event.data);
